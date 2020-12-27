@@ -1,14 +1,15 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
-
-const letter = document.getElementsByClassName('letter');
  
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase;
     }
 
+    /**
+     * Adds letter placeholders to display when games starts.
+     */
     addPhraseToDisplay() {
         const phraseList = document.querySelector('#phrase ul');
 
@@ -24,10 +25,21 @@ class Phrase {
         }
     }
 
+    /**
+     * Checks to see if the selected letter matches a letter in the phrase.
+     *
+     * @param {object} button The event object target of the keyboard click listener.
+     * @return {boolean} Whether the selected letter matches letter(s) in the phrase (true) or not (false).
+     */
     checkLetter(button) {
-        return this.phrase.toLowerCase().includes(button.textContent);
+        return this.phrase.phrase.toLowerCase().includes(button.textContent);
     }
 
+    /**
+     * Reveals letter(s) on the board that match player's selection.
+     *
+     * @param {object} button The event object target of the keyboard click listener.
+     */
     showMatchedLetter(button) {
         const matches = document.getElementsByClassName(`${button.textContent}`);
 
