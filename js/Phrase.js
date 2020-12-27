@@ -1,61 +1,51 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
-
-const letter = document.getElementsByClassName('letter');
-
+ 
 class Phrase {
     constructor(phrase) {
-        this.phrase = phrase.toLowerCase();
+        this.phrase = phrase;
     }
 
     /**
-     * Adds letter placeholders to the display upon game start.
-     *
-     * @param {array} arr The secret phrase.
+     * Adds letter placeholders to display when games starts.
      */
-    addPhraseToDisplay(arr) {
-        for (let i = 0; i < arr.length; i++) {
-            let li = document.createElement('li');
-            li.textContent = arr[i];
-            document.querySelector('#phrase ul').appendChild(li);
+    addPhraseToDisplay() {
+        const phraseList = document.querySelector('#phrase ul');
 
-            if (arr[i] === ' ') {
-                li.classList.add('space');
+        for (let char of this.phrase) {
+            const li = document.createElement('li');
+            li.textContent = char;
+            phraseList.appendChild(li);
+            if (char === ' ') {
+                li.className = 'space';
             } else {
-                li.classList.add('letter');
+                li.className = `hide letter ${char.toLowerCase()}`;
             }
         }
     }
 
     /**
-     * Checks to see if the letter selected by the player matches a letter in the phrase.
+     * Checks to see if the selected letter matches a letter in the phrase.
      *
-     * @param {object} etarget The clicked button.
-     * @return {boolean} Whether the letter represented by the clicked button matches 
-     * any of the letters in the phrase (true) or not (false).
+     * @param {object} button The event object target of the keyboard click listener.
+     * @return {boolean} Whether the selected letter matches letter(s) in the phrase (true) or not (false).
      */
-    checkLetter(etarget) {
-    let match = null; 
-    for (let i = 0; i < letter.length; i++) {
-            if (letter[i].textContent.toLowerCase() === etarget.textContent.toLowerCase()) {
-                match = true;
-            }
-        }
-        return match;
+    checkLetter(button) {
+        return this.phrase.phrase.toLowerCase().includes(button.textContent);
     }
 
     /**
-     * Reveals the letters on the board that match the player's selection.
+     * Reveals letter(s) on the board that match player's selection.
      *
-     * @param {object} etarget The clicked button.
+     * @param {object} button The event object target of the keyboard click listener.
      */
-    showMatchedLetter(etarget) {
-        for (let i = 0; i < letter.length; i++) {
-            if (checkLetter(etarget)) {
-                letter[i].classList.remove('hide');
-                letter[i].classList.add('show');
-            }
+    showMatchedLetter(button) {
+        const matches = document.getElementsByClassName(`${button.textContent}`);
+
+        for (let match of matches) {
+            match.classList.add('show');
+            match.classList.remove('hide');
         }
     }
 }

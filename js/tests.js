@@ -1,5 +1,12 @@
-console.log(Game);
 let game = new Game();
-let phrase = new Phrase();
+let phrase = new Phrase(game.getRandomPhrase(game.phrases));
+const qwerty = document.getElementById('qwerty');
 
-console.log(game.getRandomPhrase(game.phrases));
+// Check that startGame function works
+game.startGame();
+
+// Check that checkLetter and showMatchedLetter functions works
+qwerty.addEventListener('click', e => {
+    console.log(phrase.checkLetter(e.target));
+    phrase.showMatchedLetter(e.target);
+})
