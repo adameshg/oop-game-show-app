@@ -32,7 +32,7 @@ class Phrase {
      * @return {boolean} Whether the selected letter matches letter(s) in the phrase (true) or not (false).
      */
     checkLetter(button) {
-        return this.phrase.phrase.toLowerCase().includes(button.textContent);
+        return this.phrase.toLowerCase().includes(button.textContent);
     }
 
     /**
