@@ -64,23 +64,50 @@
     }
 
     /**
+     * Removes old phrase from board, resets incorrect guess count, resets
+     * heart images, sets disabled to false on all keys, restores all keys
+     * to original color
+     */
+    resetGame() {
+      const letters = document.querySelectorAll('.key');
+      const hearts = document.querySelectorAll('img[src]');
+      const phraseUl = document.getElementById('phrase');
+
+      phraseUl.innerHTML = '<ul></ul>'
+      this.missed = 0;
+      hearts.forEach(heart => {
+      heart.src = 'images/liveHeart.png';
+      });
+      letters.forEach(letter => {
+         letter.disabled = false;
+         letter.classList.remove('chosen');
+         letter.classList.remove('wrong');
+      })
+    }
+
+    /**
      * Displays overlay and updates its appearance to reflect win or loss.
      */
     gameOver() {
        const overlay = document.getElementById('overlay');
        const title = document.querySelector('.title');
        const btnReset = document.querySelector('#btn__reset');
+       const phraseUl = document.getElementById('phrase');
 
        if (this.missed >= 5) {
          overlay.style.display = '';
          overlay.className = 'lose';
          title.innerText = 'Sorry, you lose. :(';
          btnReset.innerText = 'Play Again';
+         phraseUl.innerHTML = '<ul></ul>'
+         this.resetGame();
        } else if (this.checkForWin()) {
          overlay.style.display = '';
          overlay.className = 'win';
          title.innerText = 'You win!';
          btnReset.innerText = 'Play Again';
+         phraseUl.innerHTML = '<ul></ul>'
+         this.resetGame();
        }
     }
 

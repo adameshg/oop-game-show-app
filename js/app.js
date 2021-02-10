@@ -9,14 +9,10 @@
 
 btnReset.addEventListener('click', e => {
      game.startGame();
-     console.log(game.activePhrase.phrase);
 })
 
 qwerty.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
-        // if (game.activePhrase.checkLetter(e.target)) {
-        //     // phrase.showMatchedLetter(e.target);
-        // };
         game.handleInteraction(e.target);
     }
 })
